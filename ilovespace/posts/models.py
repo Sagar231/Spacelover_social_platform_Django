@@ -1,12 +1,13 @@
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 
-import misaka
+import markdown
 
 from groups.models import  Group
 
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
 
 
@@ -21,7 +22,7 @@ class Post(models.Model):
         return self.message
 
     def save(self, *args, **kwargs):
-        self.message_html = misaka.html(self.message)
+        self.message_html = markdown.markdown(self.message)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
