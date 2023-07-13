@@ -23,6 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',acc_views.HomePage.as_view(),name = 'home'),
     path('login/',Auth_views.LoginView.as_view(template_name="accounts/login.html"),name='login'),
+    path('accounts/login/',Auth_views.LoginView.as_view(template_name="accounts/login.html"),name='accounts_login'),
     path('logout/',Auth_views.LogoutView.as_view(),name='logout'),
     path('signup/',acc_views.SignUp.as_view(),name="signup"),
+    path('posts/',include('posts.urls',namespace='posts')),
+    path('groups/',include('groups.urls',namespace='groups')),
 ]
